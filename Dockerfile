@@ -6,7 +6,8 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Étape 2 : Création de l'image finale
-FROM openjdk:17-jdk-slim
+# Changement ici : On utilise eclipse-temurin qui est disponible et fiable
+FROM eclipse-temurin:17-jdk-jammy
 WORKDIR /app
 COPY --from=build /app/target/app.jar app.jar
 
