@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bulletin de Notes</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style type="text/css">
+        @page { size: A4; margin: 2cm; }
+        body { font-family: 'DejaVu Sans', Arial, sans-serif; color: #333; line-height: 1.4; }
+        .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #0044cc; padding-bottom: 10px; }
+        .student-info { margin-bottom: 20px; }
+        .student-info strong { color: #0044cc; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th { background-color: #f2f2f2; color: #0044cc; padding: 10px; border: 1px solid #ddd; text-align: left; }
+        td { padding: 10px; border: 1px solid #ddd; }
+        .text-center { text-align: center; }
+        .fw-bold { font-weight: bold; }
+        .footer { margin-top: 40px; text-align: right; }
+        /* On évite le float:right qui bug souvent en PDF, on utilise un tableau ou margin-left */
+        .moyenne-container { width: 100%; margin-top: 20px; }
+        .moyenne-box { border: 1px solid #0044cc; background: #f9f9f9; padding: 15px; width: 250px; margin-left: auto; }
+        .badge-admis { color: green; font-weight: bold; }
+        .badge-ajourne { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>RELEVÉ DE NOTES ACADÉMIQUE</h1>
+        <p>Année Universitaire 2025-2026</p>
+    </div>
+
+    <div class="student-info">
+        <p><strong>Étudiant :</strong> <span th:text="${etudiant.nom + ' ' + etudiant.prenom}">NOM PRENOM</span></p>
+        <p><strong>Email :</strong> <span th:text="${etudiant.user.email}">email@gmail.com</span></p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Matière</th>
+                <th>Enseignant</th>
+                <th class="text-center">Note /100</th>
+                <th class="text-center">Coeff.</th>
+                <th class="text-center">Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="n : ${notes}">
+                <td>
+                    <div class="fw-bold" th:text="${n.matiere.nom}">Matière</div>
+                    <div style="font-size: 0.8em;">Code: MAT-<span th:text="${n.matiere.idMatiere}">01</span></div>
+                </td>
+                <td th:text="${n.matiere.professeur != null ? n.matiere.professeur.nom + ' ' + n.matiere.professeur.prenom : 'Non assigné'}">Professeur</td>
+                <td class="text-center fw-bold" th:text="${n.valeur}">50</td>
+                <td class="text-center" th:text="${n.matiere.coefficient}">1</td>
+                <td class="text-center" th:text="${n.valeur * n.matiere.coefficient}">50</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="moyenne-container">
+        <div class="moyenne-box">
+            <div style="font-size: 1.1em;">Moyenne Générale : <strong th:text="${moyenne + ' / 100'}">0 / 100</strong></div>
+            <div style="margin-top: 5px;">
+                Résultat : 
+                <span th:style="${moyenne >= 50 ? 'color: green; font-weight: bold;' : 'color: red; font-weight: bold;'}"
+                      th:text="${moyenne >= 50 ? 'ADMIS' : 'AJOURNÉ'}">RÉSULTAT</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Fait à Port-au-Prince, le <span th:text="${#calendars.format(#calendars.createNow(), 'dd MMMM yyyy')}">Date</span></p>
+        <p><i>Document généré numériquement par MyApp</i></p>
+    </div>
+
+</body>
+</html>

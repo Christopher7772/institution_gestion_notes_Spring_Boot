@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Étudiant — Télécharger Bulletin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link th:href="@{/css/dashboard.css}" rel="stylesheet"/>
+</head>
+<body>
+
+    <aside class="sidebar d-flex flex-column" id="sidebar">
+        <div class="p-4 border-bottom border-secondary mb-3">
+            <h4 class="mb-0 fw-bold">
+                <i class="bi bi-mortarboard-fill"></i> MyApp <span class="text-primary text-sm">Étudiant</span>
+            </h4>
+        </div>
+        <ul class="nav flex-column mb-auto">
+            <li><a th:href="@{/student/dashboard}" class="nav-link"><i class="bi bi-grid-fill"></i> Mon bulletin</a></li>
+            <li><a th:href="@{/student/notes}" class="nav-link"><i class="bi bi-journal-text"></i> Mes notes</a></li>
+            <li><a th:href="@{/student/bulletin}" class="nav-link active"><i class="bi bi-file-earmark-pdf"></i> Télécharger bulletin</a></li>
+        </ul>
+           <div class="p-3 border-top border-secondary">
+            <a href="#" onclick="document.getElementById('logoutForm').submit(); return false;" class="btn btn-outline-danger btn-sm w-100">
+                <i class="bi bi-box-arrow-left"></i> Déconnexion
+            </a>
+        </div>
+    </aside>
+
+    <div class="main-wrapper">
+        
+        
+        <nav class="top-navbar d-flex align-items-center px-4 justify-content-between">
+            <button class="btn btn-sm btn-light d-lg-none" onclick="toggleSidebar()"><i class="bi bi-list"></i></button>
+            <div class="ms-auto d-flex align-items-center">
+                <span class="me-3 text-muted">Bonjour, <strong th:text="${username}">Student</strong></span>
+                <div class="ms-2">
+                    <i class="bi bi-person-circle fs-4 text-primary"></i>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid p-4">
+            <div class="mb-4">
+                <h2 class="fw-bold h4">Documents Administratifs</h2>
+                <p class="text-muted small">Générez et téléchargez vos documents officiels en un clic.</p>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm p-4 text-center">
+                        <div class="mb-3">
+                            <i class="bi bi-file-pdf text-danger" style="font-size: 3rem;"></i>
+                        </div>
+                        <h5 class="fw-bold">Bulletin de Notes Officiel</h5>
+                        <p class="text-muted small">Format PDF - Session 2025-2026 (Semestre 1 || Semestre 2)</p>
+                        <hr>
+                        
+                        <a th:href="@{/student/download-bulletin}" class="btn btn-primary w-100">
+                            <i class="bi bi-download me-2"></i> Télécharger mon bulletin PDF
+                        </a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

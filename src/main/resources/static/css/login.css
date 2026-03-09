@@ -1,0 +1,197 @@
+:root {
+    --primary: #00f2ff;          /* Cyan Électrique */
+    --primary-dim: rgba(0, 242, 255, 0.15);
+    --bg-deep: #05070a;          /* Noir Sidéral */
+    --card-glass: rgba(13, 17, 23, 0.85);
+    --text-terminal: #e2e8f0;
+    --text-label: #64748b;
+    --border-tech: rgba(0, 242, 255, 0.2);
+    --radius-tech: 4px;          /* Coins plus secs pour plus de précision */
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', 'JetBrains Mono', monospace;
+    background-color: var(--bg-deep);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    color: var(--text-terminal);
+}
+
+/* EFFET SCANLINE (Lignes de moniteur) */
+body::before {
+    content: " ";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        rgba(18, 16, 16, 0) 50%, 
+        rgba(0, 0, 0, 0.1) 50%
+    ), linear-gradient(
+        90deg, 
+        rgba(255, 0, 0, 0.02), 
+        rgba(0, 255, 0, 0.01), 
+        rgba(0, 0, 255, 0.02)
+    );
+    background-size: 100% 3px, 3px 100%;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* GRILLE DE FOND */
+body::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: 
+        linear-gradient(var(--primary-dim) 1px, transparent 1px),
+        linear-gradient(90deg, var(--primary-dim) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: radial-gradient(circle, black, transparent 80%);
+    z-index: 0;
+}
+
+.card {
+    width: 100%;
+    max-width: 420px;
+    background: var(--card-glass);
+    padding: 40px;
+    border: 1px solid var(--border-tech);
+    border-radius: var(--radius-tech);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), inset 0 0 1px var(--primary);
+    backdrop-filter: blur(10px);
+    z-index: 20;
+    position: relative;
+}
+
+/* En-tête de module technique */
+.card-header {
+    margin-bottom: 30px;
+    border-left: 3px solid var(--primary);
+    padding-left: 15px;
+}
+
+h2 {
+    font-size: 18px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin: 0;
+    color: #fff;
+}
+
+.system-status {
+    font-size: 10px;
+    color: var(--primary);
+    font-family: 'JetBrains Mono', monospace;
+    opacity: 0.8;
+}
+
+/* Formulaire */
+label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-label);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+}
+
+input {
+    width: 100%;
+    padding: 12px 15px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-tech);
+    color: var(--primary);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 10px var(--primary-dim);
+    background: rgba(0, 242, 255, 0.05);
+}
+
+/* Alignement Option Bar */
+.auth-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-label);
+    cursor: pointer;
+}
+
+.checkbox-group input {
+    width: 14px;
+    height: 14px;
+    margin: 0;
+    accent-color: var(--primary);
+}
+
+.forgot-link {
+    font-size: 12px;
+    color: var(--primary);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+}
+
+.forgot-link:hover {
+    border-bottom: 1px solid var(--primary);
+}
+
+/* BOUTON D'EXÉCUTION */
+.btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--primary);
+    color: #000;
+    border: none;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    clip-path: polygon(0 0, 95% 0, 100% 30%, 100% 100%, 5% 100%, 0 70%); /* Forme technique découpée */
+}
+
+.btn:hover {
+    filter: brightness(1.2);
+    box-shadow: 0 0 20px var(--primary);
+}
+
+.error-inline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #ff4b4b;
+    border: 1px solid #ff4b4b;
+    padding: 10px;
+    margin-bottom: 20px;
+    background: rgba(255, 75, 75, 0.1);
+}
+
+.muted {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-label);
+}
+
+.muted a { color: var(--primary); text-decoration: none; font-weight: bold; }

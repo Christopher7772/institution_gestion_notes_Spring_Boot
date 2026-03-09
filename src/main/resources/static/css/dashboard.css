@@ -1,0 +1,25 @@
+:root { --sidebar-width: 260px; }
+        body { background-color: #f4f7f6; font-family: 'Inter', system-ui, sans-serif; }
+        
+        /* Sidebar */
+        .sidebar { width: var(--sidebar-width); height: 100vh; position: fixed; left: 0; top: 0; background: #2c3e50; color: white; z-index: 1000; transition: all 0.3s; }
+        .sidebar .nav-link { color: rgba(255,255,255,0.8); border-radius: 8px; margin: 5px 15px; transition: 0.2s; }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active { background: #34495e; color: #3498db; }
+        .sidebar .nav-link i { margin-right: 10px; }
+
+        /* Main Content */
+        .main-wrapper { margin-left: var(--sidebar-width); transition: all 0.3s; }
+        .top-navbar { background: white; border-bottom: 1px solid #e0e0e0; height: 60px; }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .sidebar { left: -100%; }
+            .sidebar.show { left: 0; }
+            .main-wrapper { margin-left: 0; }
+        }
+
+        /* Stats Cards */
+        .stat-card { border: none; border-radius: 12px; transition: transform 0.2s; }
+        .stat-card:hover { transform: translateY(-5px); }
+        .icon-box { width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+    
